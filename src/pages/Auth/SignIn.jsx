@@ -1,14 +1,36 @@
 import React, { useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Implement your sign-in logic here using email and password
-    console.log('Signing in with:', email, password);
+    try {
+      const loginData = {
+        Email: email,
+        Password: password,
+      };
+
+      const res = await axios.post(
+        'http://localhost:49907/api/customers/login',
+        loginData
+      );
+
+      localStorage.setItem('isAdmin', res.data.IsAdmin);
+      localStorage.setItem('CustomerId', res.data.CustomerId);
+
+      navigate('/');
+    } catch (error) {
+      setErrorMessage('Email/Password did not match');
+      console.log(error);
+    }
   };
 
   return (
@@ -17,8 +39,7 @@ const SignIn = () => {
       <div className='flex justify-center items-center h-screen bg-gray-900'>
         <form
           onSubmit={handleSubmit}
-          className='w-1/3 p-6 bg-sky-400 rounded-lg shadow-md'
-        >
+          className='w-1/3 p-6 bg-sky-400 rounded-lg shadow-md'>
           <h2 className='text-2xl font-bold mb-4'>Sign In</h2>
           <div className='mb-4'>
             <label className='block text-sm font-medium text-gray-700'>
@@ -46,10 +67,11 @@ const SignIn = () => {
           </div>
           <button
             type='submit'
-            className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md'
-          >
+            className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>
             Sign In
           </button>
+          <br />
+          <span className='text-red-500'>{errorMessage}</span>
         </form>
       </div>
     </>
