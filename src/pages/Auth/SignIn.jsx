@@ -7,7 +7,6 @@ const SignIn = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Implement your sign-in logic here using email and password
     console.log('Signing in with:', email, password);
   };
 

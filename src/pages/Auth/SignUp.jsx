@@ -1,26 +1,29 @@
 import React, { useState } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
 
 const SignUp = () => {
-  const [name, setName] = useState('');
+  const [CustomerName, setCustomerName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [address, setAddress] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [phone, setPhoneNumber] = useState('');
+  const navigate = useNavigate();
 
   const [errors, setErrors] = useState({
-    name: '',
+    CustomerName: '',
     email: '',
     password: '',
     address: '',
-    phoneNumber: '',
+    phone: '',
   });
 
   const validateForm = () => {
     const newErrors = {};
 
-    if (!name) {
-      newErrors.name = 'Name is required';
+    if (!CustomerName) {
+      newErrors.CustomerName = 'Name is required';
     }
 
     if (!email) {
@@ -30,39 +33,54 @@ const SignUp = () => {
     }
 
     if (!password) {
-        newErrors.password = 'Password is required';
-      } else if (password.length < 8) {
-        newErrors.password = 'Password must be at least 8 characters';
-      } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/.test(password)) {
-        newErrors.password = 'Password must contain at least one uppercase letter, one lowercase letter, and one digit';
-      }
+      newErrors.password = 'Password is required';
+    } else if (password.length < 8) {
+      newErrors.password = 'Password must be at least 8 characters';
+    } else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])/.test(password)) {
+      newErrors.password =
+        'Password must contain at least one uppercase letter, one lowercase letter, and one digit';
+    }
 
     if (!address) {
       newErrors.address = 'Address is required';
     }
 
-    if (!phoneNumber) {
-      newErrors.phoneNumber = 'Phone Number is required';
+    if (!phone) {
+      newErrors.phone = 'Phone Number is required';
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (validateForm()) {
-      console.log(
-        'Signing up with:',
-        name,
+      const newCustomer = {
+        CustomerName,
         email,
         password,
         address,
-        phoneNumber
-      );
+        phone,
+        isAdmin: false,
+      };
 
-      // Implement your sign-up logic here using the form fields
+      try {
+        const response = await axios.post(
+          'http://localhost:49907/api/customers/addcustomer',
+          newCustomer
+        );
+
+        if (response.status === 200) {
+          console.log('Customer added successfully:', response.data);
+          navigate('/SignIn');
+        } else {
+          console.log('Failed to add customer');
+        }
+      } catch (error) {
+        console.error('Error adding customer:', error);
+      }
     }
   };
 
@@ -82,14 +100,14 @@ const SignUp = () => {
             <input
               type='text'
               className={`mt-1 p-2 border rounded w-full ${
-                errors.name ? 'border-red-500' : ''
+                errors.CustomerName ? 'border-red-500' : ''
               }`}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={CustomerName}
+              onChange={(e) => setCustomerName(e.target.value)}
               required
             />
-            {errors.name && (
-              <p className='text-red-500 text-sm'>{errors.name}</p>
+            {errors.CustomerName && (
+              <p className='text-red-500 text-sm'>{errors.CustomerName}</p>
             )}
           </div>
           <div className='mb-4'>
@@ -150,14 +168,14 @@ const SignUp = () => {
             <input
               type='tel'
               className={`mt-1 p-2 border rounded w-full ${
-                errors.phoneNumber ? 'border-red-500' : ''
+                errors.phone ? 'border-red-500' : ''
               }`}
-              value={phoneNumber}
+              value={phone}
               onChange={(e) => setPhoneNumber(e.target.value)}
               required
             />
-            {errors.phoneNumber && (
-              <p className='text-red-500 text-sm'>{errors.phoneNumber}</p>
+            {errors.phone && (
+              <p className='text-red-500 text-sm'>{errors.phone}</p>
             )}
           </div>
           <button
