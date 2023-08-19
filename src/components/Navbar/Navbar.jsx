@@ -56,14 +56,14 @@ const Navbar = () => {
                   <>
                     <li>
                       <Link
-                        to='/Dashboard'
+                        to='/profile'
                         className='text-white hover:text-gray-300 px-4 py-2 rounded-md bg-yellow-500 hover:bg-yellow-600'>
-                        Dashboard
+                        Profile
                       </Link>
                     </li>
                     <li>
                       <Link
-                        to='/Logout'
+                        to='/logout'
                         className='text-white hover:text-gray-300 px-4 py-2 rounded-md bg-red-500 hover:bg-red-600'>
                         Logout
                       </Link>
@@ -73,9 +73,9 @@ const Navbar = () => {
                   <>
                     <li>
                       <Link
-                        to='/Profile'
+                        to='/dashboard'
                         className='text-white hover:text-gray-300 px-4 py-2 rounded-md bg-purple-500 hover:bg-purple-600'>
-                        Profile
+                        Dashboard
                       </Link>
                     </li>
                     <li>
