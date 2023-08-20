@@ -28,13 +28,7 @@ const SignIn = () => {
         
       );
 
-<<<<<<< HEAD
-      console.log(res.data.CustomerId);
-      console.log(res.data.IsAdmin);
-
-=======
       console.log(res.data);
->>>>>>> 7133623b6c8c9f5633f3b3bb2ce296aba22b70b8
       localStorage.setItem('isAdmin', res.data.IsAdmin);
       localStorage.setItem('CustomerId', res.data.CustomerId);
 
