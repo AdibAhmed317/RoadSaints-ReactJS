@@ -67,7 +67,7 @@ const Navbar = () => {
                   <>
                     <li>
                       <Link
-                        to='/dashboard'
+                        to='/admin/dashboard'
                         className='text-black hover:text-gray-300 px-4 py-2 rounded-md bg-yellow-500 hover:bg-yellow-600'>
                         Dashboard
                       </Link>

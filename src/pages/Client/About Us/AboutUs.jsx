@@ -1,5 +1,5 @@
 import React from 'react';
-import Navbar from '../../components/Navbar/Navbar';
+import Navbar from '../../../components/Navbar/Navbar';
 
 const aboutUsContent = `
 Welcome to RoadSaints, your trusted source for premium bike accessories. We are dedicated to providing the best quality accessories for bike enthusiasts. Our team is passionate about bikes and aims to bring you the latest and most innovative products in the industry. Whether you're a casual rider or a seasoned biker, we have something for everyone.

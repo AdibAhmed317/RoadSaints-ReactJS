@@ -1,17 +1,17 @@
 import React from 'react';
-import Navbar from '../../components/Navbar/Navbar';
+import Navbar from '../../../components/Navbar/Navbar';
 
 const teamMembers = [
   {
     name: 'Emon Singha',
     email: 'emonsingha209@gmail.com',
-    role: 'Co-Founder'
+    role: 'Co-Founder',
   },
   {
     name: 'Adib Ahmed',
     email: 'adibahmed317@gmail.com',
-    role: 'Co-Founder'
-  }
+    role: 'Co-Founder',
+  },
 ];
 
 const Contact = () => {

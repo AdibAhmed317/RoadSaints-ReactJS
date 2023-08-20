@@ -12,14 +12,24 @@ const Sidebar = () => {
         </div>
         <nav className='mt-6 flex flex-col items-center'>
           <Link
-            to='/dashboard'
+            to='/admin/create-product'
+            className='flex w-52 h-10 bg-gray-400 rounded-lg my-1 justify-center items-center'>
+            Create Product
+          </Link>
+          <Link
+            to='/admin/dashboard'
             className='flex w-52 h-10 bg-gray-400 rounded-lg my-1 justify-center items-center'>
             Show Products
           </Link>
           <Link
-            to='/create-product'
+            to='/admin/orders'
             className='flex w-52 h-10 bg-gray-400 rounded-lg my-1 justify-center items-center'>
-            Create Product
+            Show Orders
+          </Link>
+          <Link
+            to='/admin/customers'
+            className='flex w-52 h-10 bg-gray-400 rounded-lg my-1 justify-center items-center'>
+            Show Customers
           </Link>
         </nav>
       </aside>
