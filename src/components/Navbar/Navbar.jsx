@@ -1,15 +1,26 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
 
 const Navbar = () => {
-  const { customerid } = useContext(UserContext);
-  const { isAdmin } = useContext(UserContext);
+  const { customerid, setCustomerid } = useContext(UserContext);
+  const { isAdmin, setIsAdmin } = useContext(UserContext);
+
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('CustomerId');
+    navigate('/');
+    setCustomerid(null);
+    setIsAdmin(false);
+  };
+
   return (
     <div>
       <nav className='bg-gray-950 p-4'>
-        <div className='mx-auto flex justify-between items-center text-xl font-thin'>
-          <Link to='/' className='text-white text-4xl font-thin'>
+        <div className='mx-auto flex justify-between items-center text-base font-thin'>
+          <Link to='/' className='text-white text-3xl font-extralight'>
             RoadSaints
           </Link>
           <ul className='flex space-x-4'>
@@ -56,34 +67,34 @@ const Navbar = () => {
                   <>
                     <li>
                       <Link
-                        to='/profile'
-                        className='text-white hover:text-gray-300 px-4 py-2 rounded-md bg-yellow-500 hover:bg-yellow-600'>
-                        Profile
+                        to='/dashboard'
+                        className='text-black hover:text-gray-300 px-4 py-2 rounded-md bg-yellow-500 hover:bg-yellow-600'>
+                        Dashboard
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to='/logout'
-                        className='text-white hover:text-gray-300 px-4 py-2 rounded-md bg-red-500 hover:bg-red-600'>
+                      <button
+                        onClick={handleLogout}
+                        className='-mt-2 text-black hover:text-gray-300 px-4 py-2 rounded-md bg-red-500 hover:bg-red-600'>
                         Logout
-                      </Link>
+                      </button>
                     </li>
                   </>
                 ) : (
                   <>
                     <li>
                       <Link
-                        to='/dashboard'
-                        className='text-white hover:text-gray-300 px-4 py-2 rounded-md bg-purple-500 hover:bg-purple-600'>
-                        Dashboard
+                        to='/profile'
+                        className='-mt-2 text-black hover:text-gray-300 px-4 py-2 rounded-md bg-purple-500 hover:bg-purple-600'>
+                        Profile
                       </Link>
                     </li>
                     <li>
-                      <Link
-                        to='/Logout'
-                        className='text-white hover:text-gray-300 px-4 py-2 rounded-md bg-red-500 hover:bg-red-600'>
+                      <button
+                        onClick={handleLogout}
+                        className='-mt-2 text-black hover:text-gray-300 px-4 py-2 rounded-md bg-red-500 hover:bg-red-600'>
                         Logout
-                      </Link>
+                      </button>
                     </li>
                   </>
                 )}

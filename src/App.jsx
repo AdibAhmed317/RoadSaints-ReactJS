@@ -7,6 +7,9 @@ import SignUp from './pages/Auth/SignUp';
 import Cart from './pages/Client/Dashboard/CWO/Cart';
 import CustomerDashboard from './pages/Client/Dashboard/Dashboard';
 import { Route, Routes } from 'react-router-dom';
+import Dashboard from './pages/Admin/Dashboard/view/Dashboard';
+import CreateProduct from './pages/Admin/Dashboard/view/CreateProduct';
+import EditProduct from './pages/Admin/Dashboard/view/EditProduct';
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
         <Route path='/contact' element={<Contact />} />
         <Route path='/SignIn' element={<SignIn />} />
         <Route path='/SignUp' element={<SignUp />} />
+        <Route path='/dashboard' element={<Dashboard />} />
+        <Route path='/create-product' element={<CreateProduct />} />
+        <Route path='/edit-product/:productId' component={<EditProduct />} />
       </Routes>
     </>
   );
