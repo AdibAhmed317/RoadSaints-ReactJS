@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Navbar from '../../components/Navbar/Navbar';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import UserContext from '../../context/UserContext';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
+
+  const { setCustomerid } = useContext(UserContext);
+  const { setIsAdmin } = useContext(UserContext);
 
   const navigate = useNavigate();
 
@@ -23,8 +27,12 @@ const SignIn = () => {
         loginData
       );
 
+      console.log(res.data);
       localStorage.setItem('isAdmin', res.data.IsAdmin);
       localStorage.setItem('CustomerId', res.data.CustomerId);
+
+      setCustomerid(res.data.CustomerId);
+      setIsAdmin(res.data.IsAdmin);
 
       navigate('/');
     } catch (error) {

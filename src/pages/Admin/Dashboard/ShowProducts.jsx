@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { FaHeart } from 'react-icons/fa';
-import Navbar from '../../components/Navbar/Navbar';
 
-const AllProducts = () => {
+const ShowProducts = () => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -33,11 +32,7 @@ const AllProducts = () => {
 
   return (
     <>
-      <Navbar />
       <div className='bg-gray-900 text-white p-6'>
-        <h2 className='text-3xl font-bold mb-8 text-center'>
-          Explore Bike Accessories
-        </h2>
         <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-16'>
           {products.map((product) => (
             <div
@@ -77,4 +72,4 @@ const AllProducts = () => {
   );
 };
 
-export default AllProducts;
+export default ShowProducts;

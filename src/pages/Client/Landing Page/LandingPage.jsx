@@ -1,20 +1,17 @@
-import React, { useContext, useEffect } from 'react';
+import React from 'react';
 import Navbar from '../../../components/Navbar/Navbar';
 import Footer from '../../../components/Footer/Footer';
 import { Hero } from '../../../components/Hero Section/Hero';
-import UserContext from '../../../context/UserContext';
+import HeroAbout from './HeroAbout';
+import HeroContact from './HeroContact';
 
 const LandingPage = () => {
-  const { isAdmin, customerid } = useContext(UserContext);
-  useEffect(() => {
-    console.log(isAdmin);
-    console.log(customerid);
-  }, []);
-
   return (
-    <div className='flex flex-col h-screen'>
+    <div className='flex flex-col'>
       <Navbar />
       <Hero />
+      <HeroAbout />
+      <HeroContact />
       <Footer />
     </div>
   );
