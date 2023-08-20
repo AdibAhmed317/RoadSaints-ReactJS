@@ -14,7 +14,9 @@ const HeroAbout = () => {
   return (
     <div>
       <div className='p-6 bg-gray-900 text-white h-screen flex flex-col justify-center items-center'>
-        <h2 className='-mt-20 text-5xl font-bold mb-4 text-center'>About Us</h2>
+        <h2 className='-mt-40 text-5xl font-bold mb-20 text-center'>
+          About Us
+        </h2>
         <p className='text-gray-200 leading-loose'>{aboutUsContent}</p>
       </div>
     </div>

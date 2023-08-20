@@ -16,14 +16,16 @@ const teamMembers = [
 const HeroContact = () => {
   return (
     <div>
-      <div className='p-6 bg-blue-900 text-white h-screen'>
+      <div className='p-6 bg-gray-400 text-black h-screen'>
         <h2 className='text-5xl font-bold mb-4 text-center'>Contact Us</h2>
         <div className='mb-8'>
           <h3 className='text-xl font-semibold mb-2'>Our Team</h3>
           <div className='grid grid-cols-2 gap-6'>
             {teamMembers.map((member, index) => (
               <div key={index} className='bg-gray-800 p-4 rounded-lg'>
-                <h4 className='text-lg font-semibold'>{member.name}</h4>
+                <h4 className='text-lg font-semibold text-white'>
+                  {member.name}
+                </h4>
                 <p className='text-gray-300'>{member.role}</p>
                 <p className='text-blue-300'>{member.email}</p>
               </div>

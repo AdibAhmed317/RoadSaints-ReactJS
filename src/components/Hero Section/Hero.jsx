@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 export const Hero = () => {
   return (
-    <div className='bg-blue-900 text-white flex flex-col md:flex-row items-center justify-center'>
+    <div className='bg-gray-400 text-black flex flex-col md:flex-row items-center justify-center'>
       <div className='container mx-auto text-center h-screen justify-center items-center flex'>
         <div>
           <h1 className='text-4xl md:text-6xl font-bold mb-4'>
@@ -15,7 +15,7 @@ export const Hero = () => {
           </p>
           <Link
             to='/Products'
-            className='bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-lg text-lg'>
+            className='bg-blue-900 hover:bg-blue-500 text-white py-2 px-4 rounded-lg text-lg'>
             Explore Our Collection
           </Link>
         </div>
@@ -24,7 +24,7 @@ export const Hero = () => {
         <img
           src={HeroImage}
           alt='Hero Image'
-          className='max-w-full mx-auto h-full object-fill'
+          className='max-w-full mx-auto h-full object-cover'
         />
       </div>
     </div>

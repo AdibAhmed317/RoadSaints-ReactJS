@@ -53,7 +53,7 @@ const CustomerList = () => {
                 </td>
                 <td className='py-3 px-4 text-center'>
                   <Link
-                    to={`/customer-details/${customer.CustomerId}`} // Replace with your actual details page route
+                    to={`/admin/customer-details/${customer.CustomerId}`}
                     className='text-blue-500 hover:underline'>
                     Details
                   </Link>

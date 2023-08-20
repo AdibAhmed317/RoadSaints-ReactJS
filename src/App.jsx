@@ -12,6 +12,7 @@ import CreateProduct from './pages/Admin/Dashboard/CreateProduct';
 import EditProduct from './pages/Admin/Dashboard/EditProduct';
 import ShowOrders from './pages/Admin/Dashboard/ShowOders';
 import ShowCustomers from './pages/Admin/Dashboard/ShowCustomers';
+import CustomerDetails from './pages/Admin/Dashboard/CustomerDetails';
 
 function App() {
   return (
@@ -29,6 +30,10 @@ function App() {
         <Route path='/admin/create-product' element={<CreateProduct />} />
         <Route path='/admin/orders' element={<ShowOrders />} />
         <Route path='/admin/customers' element={<ShowCustomers />} />
+        <Route
+          path='/admin/customer-details/:customerId'
+          element={<CustomerDetails />}
+        />
         <Route
           path='/admin/edit-product/:productId'
           component={<EditProduct />}
