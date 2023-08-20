@@ -1,7 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import AllProducts from '../../Products/AllProducts';
-import ShowProducts from './ShowProducts';
 
 const Sidebar = () => {
   return (
@@ -22,11 +20,6 @@ const Sidebar = () => {
             to='/create-product'
             className='flex w-52 h-10 bg-gray-400 rounded-lg my-1 justify-center items-center'>
             Create Product
-          </Link>
-          <Link
-            to='/update-product'
-            className='flex w-52 h-10 bg-gray-400 rounded-lg my-1 justify-center items-center'>
-            Update Product
           </Link>
         </nav>
       </aside>
