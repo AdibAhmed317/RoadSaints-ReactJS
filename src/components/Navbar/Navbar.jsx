@@ -1,13 +1,25 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import UserContext from '../../context/UserContext';
 import Cookies from 'js-cookie';
 
 const Navbar = () => {
-  const { customerid, setCustomerid } = useContext(UserContext);
-  const { isAdmin, setIsAdmin } = useContext(UserContext);
+  const [customerid, setCustomerid] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    try {
+      const isAdminValue = localStorage.getItem('isAdmin');
+      const customerId = localStorage.getItem('CustomerId');
+
+      setIsAdmin(isAdminValue === 'true');
+      setCustomerid(customerId);
+    } catch (error) {
+      setCustomerid(null);
+      setIsAdmin(false);
+    }
+  }, []);
 
   const handleLogout = async () => {
     localStorage.removeItem('isAdmin');
