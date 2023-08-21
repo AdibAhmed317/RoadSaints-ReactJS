@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import Swal from 'sweetalert2'; // Import sweetalert2
+import 'sweetalert2/dist/sweetalert2.min.css'; // Import the CSS for styling
 import Navbar from '../../../components/Navbar/Navbar';
 
 const EditProduct = () => {
@@ -19,9 +21,6 @@ const EditProduct = () => {
 
   useEffect(() => {
     fetchProductDetails();
-  }, []);
-
-  useEffect(() => {
     fetchCatFunction();
   }, []);
 
@@ -41,7 +40,6 @@ const EditProduct = () => {
       const response = await axios.get(
         `http://localhost:49907/api/products/details/${productId}`
       );
-      console.log(response.data);
       setProductData(response.data);
     } catch (error) {
       console.error('Error fetching product details:', error);
@@ -55,10 +53,23 @@ const EditProduct = () => {
         productData,
         { withCredentials: true }
       );
-      alert('Product updated:', response.data);
-      navigate('/admin/dashboard');
+      Swal.fire({
+        title: 'Product Updated',
+        text: response.data,
+        icon: 'success',
+        timer: 3000,
+        showConfirmButton: false,
+      }).then(() => {
+        navigate('/admin/dashboard');
+      });
     } catch (error) {
       console.error('Error updating product:', error);
+      Swal.fire({
+        title: 'Error',
+        text: 'An error occurred. Please try again later.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
     }
   };
 
@@ -142,12 +153,3 @@ const EditProduct = () => {
 };
 
 export default EditProduct;
-
-// <input
-//   type='text'
-//   name='product_name'
-//   value={productData.product_name}
-//   onChange={handleChange}
-//   className='w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500'
-//   required
-// />

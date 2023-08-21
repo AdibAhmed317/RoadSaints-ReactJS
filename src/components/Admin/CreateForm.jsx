@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+import { useNavigate } from 'react-router-dom';
 
 const CreateForm = () => {
   const [fetchCat, setFetchCat] = useState([]);
   const [categoryName, setCategoryName] = useState('');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchCatFunction();
@@ -46,9 +51,22 @@ const CreateForm = () => {
         'http://localhost:49907/api/products/addproduct',
         productData
       );
-      alert(res.data);
+      Swal.fire({
+        title: 'Product Created',
+        text: res.data,
+        icon: 'success',
+        timer: 3000,
+        showConfirmButton: false,
+      });
+      navigate('/admin/dashboard');
     } catch (error) {
       console.log(error);
+      Swal.fire({
+        title: 'Error',
+        text: 'An error occurred. Please try again later.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
     }
   };
 
@@ -67,8 +85,21 @@ const CreateForm = () => {
       );
       setCategoryName('');
       fetchCatFunction();
+      Swal.fire({
+        title: 'Success',
+        text: res.data,
+        icon: 'success',
+        timer: 3000,
+        showConfirmButton: false,
+      });
     } catch (error) {
       console.log(error);
+      Swal.fire({
+        title: 'Error',
+        text: 'An error occurred. Please try again later.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
     }
   };
 

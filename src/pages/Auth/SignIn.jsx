@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import UserContext from '../../context/UserContext';
 import Cookies from 'js-cookie';
+import Swal from 'sweetalert2'; // Import sweetalert2
+import 'sweetalert2/dist/sweetalert2.min.css'; // Import the CSS for styling
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -52,9 +54,25 @@ const SignIn = () => {
       setIsAdmin(res.data.IsAdmin);
 
       navigate('/');
+
+      // Show success notification
+      Swal.fire({
+        title: 'Sign In Successful',
+        icon: 'success',
+        timer: 2000, // Display for 2 seconds
+        showConfirmButton: false,
+      });
     } catch (error) {
       setErrorMessage('Email/Password did not match');
       console.log(error);
+
+      // Show error notification
+      Swal.fire({
+        title: 'Sign In Failed',
+        text: 'Email/Password did not match',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
     }
   };
 

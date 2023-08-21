@@ -90,8 +90,7 @@ const SignUp = () => {
       <div className='flex justify-center items-center bg-gray-900 h-screen'>
         <form
           onSubmit={handleSubmit}
-          className='w-1/3 p-6 bg-sky-400 rounded-lg shadow-md'
-        >
+          className='w-1/3 p-6 bg-sky-400 rounded-lg shadow-md'>
           <h2 className='text-2xl font-bold mb-4'>Sign Up</h2>
           <div className='mb-4'>
             <label className='block text-sm font-medium text-gray-700'>
@@ -180,8 +179,7 @@ const SignUp = () => {
           </div>
           <button
             type='submit'
-            className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md'
-          >
+            className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>
             Sign Up
           </button>
         </form>
