@@ -53,8 +53,12 @@ const AllProducts = () => {
                   {product.ProductName}
                 </h3>
                 <p className='text-gray-300 mb-2'>{product.Description}</p>
-                <p className='text-gray-300 mb-2'>In Stock: {product.StockQuantity}</p>
-                <p className='text-gray-300 mb-2'>Product Type: {product.Category.CategoryName}</p>
+                <p className='text-gray-300 mb-2'>
+                  In Stock: {product.StockQuantity}
+                </p>
+                <p className='text-gray-300 mb-2'>
+                  Product Type: {product.Category.CategoryName}
+                </p>
                 <p className='text-blue-300 font-bold mb-2'>
                   Price: ${product.Price}
                 </p>

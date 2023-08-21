@@ -15,6 +15,7 @@ import ShowCustomers from './pages/Admin/Dashboard/ShowCustomers';
 import CustomerDetails from './pages/Admin/Dashboard/CustomerDetails';
 import OrderDetails from './pages/Admin/Dashboard/OrderDetails';
 import AdminProfile from './components/Admin/AdminProfile';
+import ProductDetails from './pages/Admin/Dashboard/ProductDetails';
 
 function App() {
   return (
@@ -35,6 +36,10 @@ function App() {
           element={<EditProduct />}
         />
         <Route path='/admin/orders' element={<ShowOrders />} />
+        <Route
+          path='/admin/product-details/:ProductId'
+          element={<ProductDetails />}
+        />
         <Route path='/admin/profile' element={<AdminProfile />} />
         <Route
           path='/admin/order-details/:orderId'
