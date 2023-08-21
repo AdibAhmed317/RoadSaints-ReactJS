@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
-import Swal from 'sweetalert2'; // Import sweetalert2
+import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 
 const Navbar = () => {
@@ -24,7 +24,6 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = async () => {
-    // Show confirmation alert using sweetalert2
     const result = await Swal.fire({
       title: 'Logout',
       text: 'Are you sure you want to log out?',
