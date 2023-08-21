@@ -13,6 +13,8 @@ import EditProduct from './pages/Admin/Dashboard/EditProduct';
 import ShowOrders from './pages/Admin/Dashboard/ShowOders';
 import ShowCustomers from './pages/Admin/Dashboard/ShowCustomers';
 import CustomerDetails from './pages/Admin/Dashboard/CustomerDetails';
+import OrderDetails from './pages/Admin/Dashboard/OrderDetails';
+import AdminProfile from './components/Admin/AdminProfile';
 
 function App() {
   return (
@@ -29,6 +31,11 @@ function App() {
         <Route path='/admin/dashboard' element={<Dashboard />} />
         <Route path='/admin/create-product' element={<CreateProduct />} />
         <Route path='/admin/orders' element={<ShowOrders />} />
+        <Route path='/admin/profile' element={<AdminProfile />} />
+        <Route
+          path='/admin/order-details/:orderId'
+          element={<OrderDetails />}
+        />
         <Route path='/admin/customers' element={<ShowCustomers />} />
         <Route
           path='/admin/customer-details/:customerId'

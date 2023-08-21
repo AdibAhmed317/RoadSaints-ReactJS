@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const OrderList = () => {
   const [orders, setOrders] = useState([]);
@@ -60,11 +61,11 @@ const OrderList = () => {
                   ${order.TotalAmount.toFixed(2)}
                 </td>
                 <td className='py-3 px-4 text-center'>
-                  <a
-                    href={`/order-details/${order.OrderId}`} // Replace with actual link
+                  <Link
+                    to={`/admin/order-details/${order.OrderId}`} // Replace with actual link
                     className='text-blue-500 hover:underline'>
                     Details
-                  </a>
+                  </Link>
                 </td>
               </tr>
             ))}

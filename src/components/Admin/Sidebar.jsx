@@ -31,6 +31,11 @@ const Sidebar = () => {
             className='flex w-52 h-10 bg-gray-400 rounded-lg my-1 justify-center items-center'>
             Show Customers
           </Link>
+          <Link
+            to='/admin/profile'
+            className='flex w-52 h-10 bg-gray-400 rounded-lg my-1 justify-center items-center'>
+            Profile
+          </Link>
         </nav>
       </aside>
     </div>

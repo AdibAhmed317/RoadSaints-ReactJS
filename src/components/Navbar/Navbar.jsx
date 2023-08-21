@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import UserContext from '../../context/UserContext';
+import Cookies from 'js-cookie';
 
 const Navbar = () => {
   const { customerid, setCustomerid } = useContext(UserContext);
@@ -11,6 +12,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     localStorage.removeItem('isAdmin');
     localStorage.removeItem('CustomerId');
+    Cookies.remove('AuthCookie', { path: '/' });
     navigate('/');
     setCustomerid(null);
     setIsAdmin(false);

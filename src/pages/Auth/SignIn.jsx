@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import UserContext from '../../context/UserContext';
+import Cookies from 'js-cookie';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -13,6 +14,18 @@ const SignIn = () => {
   const { setIsAdmin } = useContext(UserContext);
 
   const navigate = useNavigate();
+
+  const setCookie = () => {
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 3); // Set to 3 days from now
+
+    const cookieAttributes = {
+      expires: expirationDate,
+      path: '/',
+    };
+
+    Cookies.set('AuthCookie', 'IsAdmin=True', cookieAttributes);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,8 +38,11 @@ const SignIn = () => {
       const res = await axios.post(
         'http://localhost:49907/api/customers/login',
         loginData
-        
       );
+
+      if (res.data.IsAdmin) {
+        setCookie();
+      }
 
       console.log(res.data);
       localStorage.setItem('isAdmin', res.data.IsAdmin);
