@@ -10,6 +10,14 @@ const OrderList = () => {
     fetchOrders(searchCustomerId);
   }, [searchCustomerId]);
 
+  useEffect(() => {
+    const totalRevenue = orders.reduce(
+      (sum, order) => sum + order.TotalAmount,
+      0
+    );
+    setTotalRevenue(totalRevenue);
+  }, [orders]);
+
   const fetchOrders = (customerId) => {
     axios
       .get(`http://localhost:49907/api/orders/allorders/${customerId}`)
@@ -21,6 +29,7 @@ const OrderList = () => {
       });
   };
 
+  const [totalRevenue, setTotalRevenue] = useState(0);
   return (
     <div className='container mx-auto p-6'>
       <h1 className='text-3xl font-semibold mb-6'>Order List</h1>
@@ -37,6 +46,12 @@ const OrderList = () => {
           className='px-4 py-2 bg-blue-500 text-white rounded-r-lg hover:bg-blue-600 focus:outline-none'>
           Search
         </button>
+      </div>
+      {/* Display total revenue */}
+      <div className='mb-4'>
+        <p className='font-semibold'>
+          Total Revenue: ${totalRevenue.toFixed(2)}
+        </p>
       </div>
       <div className='overflow-x-auto'>
         <table className='min-w-full bg-white rounded-lg overflow-hidden'>
