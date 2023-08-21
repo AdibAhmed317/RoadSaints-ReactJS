@@ -46,7 +46,7 @@ const CreateForm = () => {
         'http://localhost:49907/api/products/addproduct',
         productData
       );
-      console.log(res);
+      alert(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +65,6 @@ const CreateForm = () => {
         categoryData,
         { withCredentials: true }
       );
-      console.log(res);
       setCategoryName('');
       fetchCatFunction();
     } catch (error) {

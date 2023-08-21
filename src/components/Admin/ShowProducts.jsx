@@ -50,7 +50,7 @@ const ShowProducts = () => {
               </div>
               <div className='flex justify-between items-center'>
                 <Link
-                  to={`/edit-product/${product.ProductId}`} // Replace with actual route
+                  to={`/admin/edit-product/${product.ProductId}`} // Replace with actual route
                   className='mt-2 bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-md'>
                   Edit
                 </Link>
