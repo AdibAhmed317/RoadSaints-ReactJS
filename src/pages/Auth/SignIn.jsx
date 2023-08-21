@@ -3,6 +3,7 @@ import Navbar from '../../components/Navbar/Navbar';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import UserContext from '../../context/UserContext';
+import { Link } from 'react-router-dom';
 
 const SignIn = () => {
   const [email, setEmail] = useState('');
@@ -45,18 +46,18 @@ const SignIn = () => {
   return (
     <>
       <Navbar />
-      <div className='flex justify-center items-center h-screen bg-gray-900'>
+      <div className='flex items-center justify-center h-screen bg-gray-900'>
         <form
           onSubmit={handleSubmit}
-          className='w-1/3 p-6 bg-sky-400 rounded-lg shadow-md'>
-          <h2 className='text-2xl font-bold mb-4'>Sign In</h2>
+          className='w-1/3 p-6 rounded-lg shadow-md bg-sky-400'>
+          <h2 className='mb-4 text-2xl font-bold'>Sign In</h2>
           <div className='mb-4'>
             <label className='block text-sm font-medium text-gray-700'>
               Email
             </label>
             <input
               type='email'
-              className='mt-1 p-2 border rounded w-full'
+              className='w-full p-2 mt-1 border rounded'
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -68,7 +69,7 @@ const SignIn = () => {
             </label>
             <input
               type='password'
-              className='mt-1 p-2 border rounded w-full'
+              className='w-full p-2 mt-1 border rounded'
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -76,10 +77,16 @@ const SignIn = () => {
           </div>
           <button
             type='submit'
-            className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>
+            className='px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700'>
             Sign In
           </button>
           <br />
+          <div className='flex gap-2 mt-2'>
+          <p>New Member?</p>
+          <Link to='/SignUp'>
+            Register Here
+          </Link>
+          </div>
           <span className='text-red-500'>{errorMessage}</span>
         </form>
       </div>
