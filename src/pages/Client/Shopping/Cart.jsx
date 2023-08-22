@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../../components/Navbar/Navbar";
 import axios from "axios";
 import { FaTimes } from "react-icons/fa";
-import Dp from '../../../assets/hero.jpg';
+import Dp from "../../../assets/hero.jpg";
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -180,10 +180,7 @@ const Cart = () => {
           {cartItems.map((item) => (
             <div key={item.CartId} className="relative design-item">
               <div className="design-image">
-                <img
-                  src={Dp}
-                  alt={item.Product.ProductName}
-                />
+                <img src={Dp} alt={item.Product.ProductName} />
               </div>
               <div className="design-details">
                 <p className="design-product-name">

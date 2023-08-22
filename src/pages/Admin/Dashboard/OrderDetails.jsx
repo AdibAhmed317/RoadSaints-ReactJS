@@ -43,7 +43,7 @@ const OrderDetails = () => {
 
   if (!order.OrderId || !productInfo.ProductName) {
     return (
-      <div className='h-screen flex items-center justify-center'>
+      <div className='flex items-center justify-center h-screen'>
         Loading...
       </div>
     );
@@ -52,18 +52,18 @@ const OrderDetails = () => {
   return (
     <>
       <Navbar />
-      <div className='bg-gray-100 min-h-screen py-12 px-4 sm:px-6 lg:px-8'>
-        <div className='max-w-md mx-auto bg-white rounded-lg shadow-lg overflow-hidden md:max-w-2xl'>
+      <div className='min-h-screen px-4 py-12 bg-gray-100 sm:px-6 lg:px-8'>
+        <div className='max-w-md mx-auto overflow-hidden bg-white rounded-lg shadow-lg md:max-w-2xl'>
           <div className='md:flex'>
             <div className='md:flex-shrink-0'>
               <img
-                className='h-48 w-full object-cover md:w-48'
+                className='object-cover w-full h-48 md:w-48'
                 src={dp}
                 alt='Customer Profile'
               />
             </div>
             <div className='p-8'>
-              <div className='uppercase tracking-wide text-sm text-indigo-500 font-semibold'>
+              <div className='text-sm font-semibold tracking-wide text-indigo-500 uppercase'>
                 Order Details
               </div>
               <div className='mt-2'>
