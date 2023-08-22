@@ -49,7 +49,8 @@ const CreateForm = () => {
     try {
       const res = await axios.post(
         'http://localhost:49907/api/products/addproduct',
-        productData
+        productData,
+        { withCredentials: true }
       );
       Swal.fire({
         title: 'Product Created',
