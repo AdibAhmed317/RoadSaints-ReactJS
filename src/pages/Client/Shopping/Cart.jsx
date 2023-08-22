@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../../../components/Navbar/Navbar";
 import axios from "axios";
 import { FaTimes } from "react-icons/fa";
+import Dp from '../../../assets/hero.jpg';
 
 const Cart = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -121,6 +122,32 @@ const Cart = () => {
         } catch (error) {
           console.error("Error deleting cart item:", error);
         }
+        const orderSummaryText = `
+      Order Summary
+      Customer ID: ${customerId}
+      Order Date: ${combinedData.order.OrderDate}
+      Total Amount: $${combinedData.order.TotalAmount}
+
+      Order Details:
+      ${combinedData.orderDetails
+        .map(
+          (detail) =>
+            `Product ID: ${detail.ProductId}, Quantity: ${detail.Quantity}, Subtotal: $${detail.Subtotal}`
+        )
+        .join("\n")}
+    `;
+        const blob = new Blob([orderSummaryText], { type: "text/plain" });
+
+        const url = URL.createObjectURL(blob);
+        const downloadLink = document.createElement("a");
+        downloadLink.href = url;
+        downloadLink.download = "order_summary.txt";
+        downloadLink.textContent = "Download Order Summary";
+
+        downloadLink.click();
+
+        URL.revokeObjectURL(url);
+        downloadLink.remove();
       }
     } catch (error) {
       console.error("Error confirming order:", error);
@@ -146,51 +173,60 @@ const Cart = () => {
 
   return (
     <div className="min-h-screen text-white bg-gray-900">
-    <Navbar />
-    <div className="container py-12 mx-auto">
-      <h2 className="mb-8 text-3xl font-semibold">Your Cart</h2>
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {cartItems.map((item) => (
-          <div key={item.CartId} className="relative design-item">
-            <div className="design-image">
-              <img src={item.Product.ImageUrl} alt={item.Product.ProductName} />
-            </div>
-            <div className="design-details">
-              <p className="design-product-name">Product Name: {item.Product.ProductName}</p>
-              <p className="design-product-price">Price: ${item.Product.Price}</p>
-              <p className="design-product-price">Quantity: {item.Quantity}</p>
-              <div className="absolute right-2 top-2">
-              <button
-                className="design-remove-button"
-                onClick={() => handleDeleteCartItem(item.CartId)}
-              >
-                <FaTimes />
-              </button>
+      <Navbar />
+      <div className="container py-12 mx-auto">
+        <h2 className="mb-8 text-3xl font-semibold">Your Cart</h2>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {cartItems.map((item) => (
+            <div key={item.CartId} className="relative design-item">
+              <div className="design-image">
+                <img
+                  src={Dp}
+                  alt={item.Product.ProductName}
+                />
+              </div>
+              <div className="design-details">
+                <p className="design-product-name">
+                  Product Name: {item.Product.ProductName}
+                </p>
+                <p className="design-product-price">
+                  Price: ${item.Product.Price}
+                </p>
+                <p className="design-product-price">
+                  Quantity: {item.Quantity}
+                </p>
+                <div className="absolute right-2 top-2">
+                  <button
+                    className="design-remove-button"
+                    onClick={() => handleDeleteCartItem(item.CartId)}
+                  >
+                    <FaTimes />
+                  </button>
+                </div>
               </div>
             </div>
+          ))}
+        </div>
+        <div className="p-6 mt-8 bg-gray-800 rounded-lg shadow-md">
+          <h3 className="mb-2 text-xl font-semibold">Subtotal</h3>
+          <p className="text-lg">Total: ${subtotal}</p>
+          <div className="flex gap-4 mt-4">
+            <button
+              className="px-4 py-2 text-white bg-red-700 rounded-md hover:bg-red-600"
+              onClick={handleRemoveAll}
+            >
+              Remove All
+            </button>
+            <button
+              className="px-4 py-2 text-white bg-green-700 rounded-md hover:bg-green-600"
+              onClick={handleConfirmOrder}
+            >
+              Confirm Order
+            </button>
           </div>
-        ))}
-      </div>
-      <div className="p-6 mt-8 bg-gray-800 rounded-lg shadow-md">
-        <h3 className="mb-2 text-xl font-semibold">Subtotal</h3>
-        <p className="text-lg">Total: ${subtotal}</p>
-        <div className="flex gap-4 mt-4">
-          <button
-            className="px-4 py-2 text-white bg-red-700 rounded-md hover:bg-red-600"
-            onClick={handleRemoveAll}
-          >
-            Remove All
-          </button>
-          <button
-            className="px-4 py-2 text-white bg-green-700 rounded-md hover:bg-green-600"
-            onClick={handleConfirmOrder}
-          >
-            Confirm Order
-          </button>
         </div>
       </div>
     </div>
-  </div>
   );
 };
 

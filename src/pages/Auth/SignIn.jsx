@@ -5,7 +5,7 @@ import axios from 'axios';
 import UserContext from '../../context/UserContext';
 import Cookies from 'js-cookie';
 import Swal from 'sweetalert2'; // Import sweetalert2
-import 'sweetalert2/dist/sweetalert2.min.css'; // Import the CSS for styling
+import 'sweetalert2/dist/sweetalert2.min.css'; 
 import { Link } from 'react-router-dom';
 
 const SignIn = () => {
@@ -20,7 +20,7 @@ const SignIn = () => {
 
   const setCookie = () => {
     const expirationDate = new Date();
-    expirationDate.setDate(expirationDate.getDate() + 3); // Set to 3 days from now
+    expirationDate.setDate(expirationDate.getDate() + 3); 
 
     const cookieAttributes = {
       expires: expirationDate,
@@ -56,7 +56,6 @@ const SignIn = () => {
 
       navigate('/');
 
-      // Show success notification
       Swal.fire({
         title: 'Sign In Successful',
         icon: 'success',
@@ -67,7 +66,6 @@ const SignIn = () => {
       setErrorMessage('Email/Password did not match');
       console.log(error);
 
-      // Show error notification
       Swal.fire({
         title: 'Sign In Failed',
         text: 'Email/Password did not match',

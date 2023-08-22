@@ -43,7 +43,7 @@ const OrderHistory = () => {
               <ul className="ml-6 list-disc">
                 {order.OrderDetails.map((detail) => (
                   <li key={detail.OrderDetailId}>
-                    Product ID: {detail.Product.ProductName}, Price: {detail.Product.Price}, Quantity: {detail.Quantity}, Subtotal: ${detail.Subtotal}
+                    Product Name: {detail.Product.ProductName}, Price: {detail.Product.Price}, Quantity: {detail.Quantity}, Subtotal: ${detail.Subtotal}
                   </li>
                 ))}
               </ul>

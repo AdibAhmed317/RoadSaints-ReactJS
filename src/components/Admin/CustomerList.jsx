@@ -14,7 +14,7 @@ const CustomerList = () => {
       const response = await axios.get(
         'http://localhost:49907/api/customers/allcustomers',
         {
-          withCredentials: true, // Allow sending cookies
+          withCredentials: true, 
         }
       );
 

@@ -3,7 +3,7 @@ import Navbar from "../../../components/Navbar/Navbar";
 import axios from "axios";
 import { FaTimes, FaCartPlus } from "react-icons/fa";
 import "../../../index.css";
-import Cart from "./Cart";
+import Dp from '../../../assets/hero.jpg';
 
 const Wishlist = () => {
   const [wishlistItems, setWishlistItems] = useState([]);
@@ -78,7 +78,7 @@ const Wishlist = () => {
           {wishlistItems.map((item) => (
             <div key={item.WishlistId} className="relative design-item">
               <div className="design-image">
-                <img src={item.Product.ImageUrl} alt={item.Product.ProductName} />
+                <img src={Dp} alt={item.Product.ProductName} />
               </div>
               <div className="design-details">
                 <p className="design-product-name">Product Name: {item.Product.ProductName}</p>
