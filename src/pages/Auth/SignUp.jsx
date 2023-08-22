@@ -91,8 +91,7 @@ const SignUp = () => {
       <div className='flex items-center justify-center h-screen bg-gray-900'>
         <form
           onSubmit={handleSubmit}
-          className='w-1/3 p-6 rounded-lg shadow-md bg-sky-400'
-        >
+          className='w-1/3 p-6 rounded-lg shadow-md bg-sky-400'>
           <h2 className='mb-4 text-2xl font-bold'>Sign Up</h2>
           <div className='mb-4'>
             <label className='block text-sm font-medium text-gray-700'>

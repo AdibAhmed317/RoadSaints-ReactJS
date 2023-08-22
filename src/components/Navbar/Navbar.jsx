@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import { FaShoppingCart, FaHeart, FaHistory } from "react-icons/fa";
 import axios from "axios";
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
 
 
 const Navbar = () => {
@@ -51,12 +53,32 @@ const Navbar = () => {
   }, []);
 
   const handleLogout = async () => {
-    localStorage.removeItem('isAdmin');
-    localStorage.removeItem('CustomerId');
-    Cookies.remove('AuthCookie', { path: '/' });
-    navigate('/');
-    setCustomerid(null);
-    setIsAdmin(false);
+    const result = await Swal.fire({
+      title: 'Logout',
+      text: 'Are you sure you want to log out?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Logout',
+    });
+
+    if (result.isConfirmed) {
+      localStorage.removeItem('isAdmin');
+      localStorage.removeItem('CustomerId');
+      Cookies.remove('AuthCookie', { path: '/' });
+      navigate('/');
+      setCustomerid(null);
+      setIsAdmin(false);
+
+      // Show success notification
+      Swal.fire({
+        title: 'Logged Out',
+        text: 'You have successfully logged out.',
+        icon: 'success',
+        confirmButtonText: 'OK',
+      });
+    }
   };
 
   return (
@@ -127,7 +149,7 @@ const Navbar = () => {
                   <>
                     <li>
                       <Link
-                        to='/profile'
+                        to='/customer/profile'
                         className='px-4 py-2 -mt-2 text-black bg-purple-500 rounded-md hover:text-gray-300 hover:bg-purple-600'>
                         Profile
                       </Link>
@@ -135,7 +157,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         to="/cart"
-                        className="flex px-4 py-2 -mt-2 text-black bg-blue-500 rounded-md hover:text-gray-300 hover:bg-blue-600"
+                        className="flex h-10 px-4 py-2 -mt-2 text-black bg-blue-500 rounded-md hover:text-gray-300 hover:bg-blue-600"
                       >
                         <div className="relative">
                           <FaShoppingCart className="inline mr-2" />
@@ -151,7 +173,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         to="/wishlist"
-                        className="px-4 py-2 -mt-2 text-black bg-green-500 rounded-md hover:text-gray-300 hover:bg-green-600"
+                        className="h-10 px-4 py-2 -mt-2 text-black bg-green-500 rounded-md hover:text-gray-300 hover:bg-green-600"
                       >
                         <FaHeart className="inline mr-2" /> Wishlist
                       </Link>
@@ -159,7 +181,7 @@ const Navbar = () => {
                     <li>
                       <Link
                         to="/orderhistory"
-                        className="px-4 py-2 -mt-2 text-black bg-yellow-500 rounded-md hover:text-gray-300 hover:bg-yellow-600"
+                        className="h-10 px-4 py-2 -mt-2 text-black bg-yellow-500 rounded-md hover:text-gray-300 hover:bg-yellow-600"
                       >
                         <FaHistory className="inline mr-2" /> Order History
                       </Link>

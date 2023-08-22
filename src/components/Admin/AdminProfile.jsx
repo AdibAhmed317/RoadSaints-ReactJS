@@ -1,28 +1,37 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { useParams, Link } from 'react-router-dom';
-import Navbar from '../../../components/Navbar/Navbar';
+import { Link } from 'react-router-dom';
+import Navbar from '../../components/Navbar/Navbar';
+import UserContext from '../../context/UserContext';
 
-const CustomerDetails = () => {
-  const { customerId } = useParams();
-  const [customer, setCustomer] = useState(null);
+const AdminProfile = () => {
+  const { customerid, isAdmin } = useContext(UserContext);
+  const [idParam, setIdParam] = useState(null);
+  const [adminDetails, setAdminDetails] = useState();
 
   useEffect(() => {
-    fetchCustomerDetails();
-  }, []);
+    if (isAdmin) {
+      setIdParam(customerid);
+    }
 
-  const fetchCustomerDetails = () => {
-    axios
-      .get(`http://localhost:49907/api/customers/details/${customerId}`)
-      .then((response) => {
-        setCustomer(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching customer details:', error);
-      });
+    if (idParam) {
+      fetchAdminDetails();
+    }
+  }, [isAdmin, idParam]);
+
+  const fetchAdminDetails = async () => {
+    try {
+      const res = await axios.get(
+        `http://localhost:49907/api/customers/details/${idParam}`
+      );
+
+      setAdminDetails(res.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
-  if (!customer) {
+  if (!adminDetails) {
     return (
       <div className='h-screen flex items-center justify-center'>
         Loading...
@@ -48,23 +57,24 @@ const CustomerDetails = () => {
                 Customer Details
               </div>
               <h2 className='mt-2 text-2xl leading-7 font-semibold text-gray-900'>
-                {customer.CustomerName}
+                {adminDetails.CustomerName}
               </h2>
               <div className='mt-2'>
                 <p className='text-sm text-gray-500'>
-                  <strong>Customer ID:</strong> {customer.CustomerId}
+                  <strong>Customer ID:</strong> {adminDetails.CustomerId}
                 </p>
                 <p className='text-sm text-gray-500'>
-                  <strong>Email:</strong> {customer.Email}
+                  <strong>Email:</strong> {adminDetails.Email}
                 </p>
                 <p className='text-sm text-gray-500'>
-                  <strong>Address:</strong> {customer.Address}
+                  <strong>Address:</strong> {adminDetails.Address}
                 </p>
                 <p className='text-sm text-gray-500'>
-                  <strong>Phone:</strong> {customer.Phone}
+                  <strong>Phone:</strong> {adminDetails.Phone}
                 </p>
                 <p className='text-sm text-gray-500'>
-                  <strong>Is Admin:</strong> {customer.IsAdmin ? 'Yes' : 'No'}
+                  <strong>Is Admin:</strong>{' '}
+                  {adminDetails.IsAdmin ? 'Yes' : 'No'}
                 </p>
               </div>
               <div className='mt-4'>
@@ -82,4 +92,4 @@ const CustomerDetails = () => {
   );
 };
 
-export default CustomerDetails;
+export default AdminProfile;

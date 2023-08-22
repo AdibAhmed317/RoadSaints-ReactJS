@@ -8,7 +8,6 @@ const AllProducts = () => {
   const navigate = useNavigate();
   
   const addToWishlist = async (productId) => {
-    const customerId = localStorage.getItem('CustomerId');
     if (customerId) {
       try {
         const response = await axios.post('http://localhost:49907/api/wishlist/addtowishlist', {

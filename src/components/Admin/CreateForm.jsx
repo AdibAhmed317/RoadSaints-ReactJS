@@ -1,8 +1,14 @@
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+import { useNavigate } from 'react-router-dom';
 
 const CreateForm = () => {
   const [fetchCat, setFetchCat] = useState([]);
+  const [categoryName, setCategoryName] = useState('');
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchCatFunction();
@@ -13,10 +19,10 @@ const CreateForm = () => {
       const response = await axios.get(
         'http://localhost:49907/api/categories/all-categories'
       );
-      console.log(response.data);
-
       setFetchCat(response.data);
-    } catch (error) {}
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const imgUrl = 'https://picsum.photos/200/300';
@@ -43,18 +49,63 @@ const CreateForm = () => {
     try {
       const res = await axios.post(
         'http://localhost:49907/api/products/addproduct',
-        productData
+        productData, { withCredentials: true }
       );
-      console.log(res);
+      Swal.fire({
+        title: 'Product Created',
+        text: res.data,
+        icon: 'success',
+        timer: 3000,
+        showConfirmButton: false,
+      });
+      navigate('/admin/dashboard');
     } catch (error) {
       console.log(error);
+      Swal.fire({
+        title: 'Error',
+        text: 'An error occurred. Please try again later.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
     }
-    console.log('Product Data:', productData);
+  };
+
+  const handleCategoryChange = (event) => {
+    setCategoryName(event.target.value);
+  };
+
+  const handleCategorySubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const categoryData = { CategoryName: categoryName };
+      const res = await axios.post(
+        'http://localhost:49907/api/categories/add-categories',
+        categoryData,
+        { withCredentials: true }
+      );
+      setCategoryName('');
+      fetchCatFunction();
+      Swal.fire({
+        title: 'Success',
+        text: res.data,
+        icon: 'success',
+        timer: 3000,
+        showConfirmButton: false,
+      });
+    } catch (error) {
+      console.log(error);
+      Swal.fire({
+        title: 'Error',
+        text: 'An error occurred. Please try again later.',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
+    }
   };
 
   return (
-    <div className='container mx-auto p-8'>
-      <h2 className='text-2xl font-semibold mb-4'>Create New Product</h2>
+    <div className='container p-8 mx-auto'>
+      <h2 className='mb-4 text-2xl font-semibold'>Create New Product</h2>
       <form onSubmit={handleSubmit}>
         <div className='mb-4'>
           <label className='block text-gray-700'>Product Name</label>
@@ -111,10 +162,31 @@ const CreateForm = () => {
         </div>
         <button
           type='submit'
-          className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'>
+          className='px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600'>
           Create Product
         </button>
       </form>
+      <div className='mt-8'>
+        <h2 className='mb-4 text-2xl font-semibold'>Add New Category</h2>
+        <form onSubmit={handleCategorySubmit}>
+          <div className='mb-4'>
+            <label className='block text-gray-700'>Category Name</label>
+            <input
+              type='text'
+              name='categoryName'
+              value={categoryName}
+              onChange={handleCategoryChange}
+              className='w-full px-4 py-2 border rounded focus:outline-none focus:border-blue-500'
+              required
+            />
+          </div>
+          <button
+            type='submit'
+            className='px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600'>
+            Add Category
+          </button>
+        </form>
+      </div>
     </div>
   );
 };

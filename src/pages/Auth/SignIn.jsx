@@ -3,6 +3,9 @@ import Navbar from '../../components/Navbar/Navbar';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import UserContext from '../../context/UserContext';
+import Cookies from 'js-cookie';
+import Swal from 'sweetalert2'; // Import sweetalert2
+import 'sweetalert2/dist/sweetalert2.min.css'; // Import the CSS for styling
 import { Link } from 'react-router-dom';
 
 const SignIn = () => {
@@ -15,6 +18,18 @@ const SignIn = () => {
 
   const navigate = useNavigate();
 
+  const setCookie = () => {
+    const expirationDate = new Date();
+    expirationDate.setDate(expirationDate.getDate() + 3); // Set to 3 days from now
+
+    const cookieAttributes = {
+      expires: expirationDate,
+      path: '/',
+    };
+
+    Cookies.set('AuthCookie', 'IsAdmin=True', cookieAttributes);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -26,8 +41,11 @@ const SignIn = () => {
       const res = await axios.post(
         'http://localhost:49907/api/customers/login',
         loginData
-        
       );
+
+      if (res.data.IsAdmin) {
+        setCookie();
+      }
 
       console.log(res.data);
       localStorage.setItem('isAdmin', res.data.IsAdmin);
@@ -37,9 +55,25 @@ const SignIn = () => {
       setIsAdmin(res.data.IsAdmin);
 
       navigate('/');
+
+      // Show success notification
+      Swal.fire({
+        title: 'Sign In Successful',
+        icon: 'success',
+        timer: 2000, // Display for 2 seconds
+        showConfirmButton: false,
+      });
     } catch (error) {
       setErrorMessage('Email/Password did not match');
       console.log(error);
+
+      // Show error notification
+      Swal.fire({
+        title: 'Sign In Failed',
+        text: 'Email/Password did not match',
+        icon: 'error',
+        confirmButtonText: 'OK',
+      });
     }
   };
 

@@ -12,15 +12,19 @@ import EditProduct from './pages/Admin/Dashboard/EditProduct';
 import ShowOrders from './pages/Admin/Dashboard/ShowOders';
 import ShowCustomers from './pages/Admin/Dashboard/ShowCustomers';
 import CustomerDetails from './pages/Admin/Dashboard/CustomerDetails';
+import OrderDetails from './pages/Admin/Dashboard/OrderDetails';
+import AdminProfile from './components/Admin/AdminProfile';
+import ProductDetails from './pages/Admin/Dashboard/ProductDetails';
 import Wishlist from './pages/Client/Shopping/Wishlist';
 import OrderHistory from './pages/Client/Shopping/OrderHistory';
+import CustomerProfile from './pages/Client/Profile/CustomerProfile';
 
 function App() {
   return (
     <>
       <Routes>
         <Route path='/' element={<LandingPage />} />
-        <Route path='/Products' element={<AllProducts />} />
+        <Route path='/products' element={<AllProducts />} />
         <Route path='/about' element={<AboutUs />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/wishlist' element={<Wishlist />} />
@@ -30,7 +34,21 @@ function App() {
         <Route path='/SignUp' element={<SignUp />} />
         <Route path='/admin/dashboard' element={<Dashboard />} />
         <Route path='/admin/create-product' element={<CreateProduct />} />
+        <Route
+          path='/admin/edit-product/:productId'
+          element={<EditProduct />}
+        />
         <Route path='/admin/orders' element={<ShowOrders />} />
+        <Route
+          path='/admin/product-details/:ProductId'
+          element={<ProductDetails />}
+        />
+        <Route path='/admin/profile' element={<AdminProfile />} />
+        <Route path='/customer/profile' element={<CustomerProfile />} />
+        <Route
+          path='/admin/order-details/:orderId'
+          element={<OrderDetails />}
+        />
         <Route path='/admin/customers' element={<ShowCustomers />} />
         <Route
           path='/admin/customer-details/:customerId'
