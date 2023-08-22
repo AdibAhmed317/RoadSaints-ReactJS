@@ -59,6 +59,7 @@ const CreateForm = () => {
         timer: 3000,
         showConfirmButton: false,
       });
+      console.log(productData);
       navigate('/admin/dashboard');
     } catch (error) {
       console.log(error);
