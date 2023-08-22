@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '../../components/Navbar/Navbar';
+import { Link } from 'react-router-dom';
 
 const SignUp = () => {
   const [CustomerName, setCustomerName] = useState('');
@@ -87,11 +88,11 @@ const SignUp = () => {
   return (
     <>
       <Navbar />
-      <div className='flex justify-center items-center bg-gray-900 h-screen'>
+      <div className='flex items-center justify-center h-screen bg-gray-900'>
         <form
           onSubmit={handleSubmit}
-          className='w-1/3 p-6 bg-sky-400 rounded-lg shadow-md'>
-          <h2 className='text-2xl font-bold mb-4'>Sign Up</h2>
+          className='w-1/3 p-6 rounded-lg shadow-md bg-sky-400'>
+          <h2 className='mb-4 text-2xl font-bold'>Sign Up</h2>
           <div className='mb-4'>
             <label className='block text-sm font-medium text-gray-700'>
               Name
@@ -106,7 +107,7 @@ const SignUp = () => {
               required
             />
             {errors.CustomerName && (
-              <p className='text-red-500 text-sm'>{errors.CustomerName}</p>
+              <p className='text-sm text-red-500'>{errors.CustomerName}</p>
             )}
           </div>
           <div className='mb-4'>
@@ -123,7 +124,7 @@ const SignUp = () => {
               required
             />
             {errors.email && (
-              <p className='text-red-500 text-sm'>{errors.email}</p>
+              <p className='text-sm text-red-500'>{errors.email}</p>
             )}
           </div>
           <div className='mb-4'>
@@ -140,7 +141,7 @@ const SignUp = () => {
               required
             />
             {errors.password && (
-              <p className='text-red-500 text-sm'>{errors.password}</p>
+              <p className='text-sm text-red-500'>{errors.password}</p>
             )}
           </div>
           <div className='mb-4'>
@@ -157,7 +158,7 @@ const SignUp = () => {
               required
             />
             {errors.address && (
-              <p className='text-red-500 text-sm'>{errors.address}</p>
+              <p className='text-sm text-red-500'>{errors.address}</p>
             )}
           </div>
           <div className='mb-4'>
@@ -174,14 +175,21 @@ const SignUp = () => {
               required
             />
             {errors.phone && (
-              <p className='text-red-500 text-sm'>{errors.phone}</p>
+              <p className='text-sm text-red-500'>{errors.phone}</p>
             )}
           </div>
           <button
             type='submit'
-            className='bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md'>
+            className='px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700'
+          >
             Sign Up
           </button>
+          <div className='flex gap-2 mt-2'>
+          <p>Already Member?</p>
+          <Link to='/SignIn'>
+            Login Here
+          </Link>
+          </div>
         </form>
       </div>
     </>

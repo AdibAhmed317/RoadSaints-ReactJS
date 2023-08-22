@@ -4,8 +4,7 @@ import AboutUs from './pages/Client/About Us/AboutUs';
 import Contact from './pages/Client/Contact/Contact';
 import SignIn from './pages/Auth/SignIn';
 import SignUp from './pages/Auth/SignUp';
-import Cart from './pages/Client/Dashboard/CWO/Cart';
-import CustomerDashboard from './pages/Client/Dashboard/Dashboard';
+import Cart from './pages/Client/Shopping/Cart';
 import { Route, Routes } from 'react-router-dom';
 import Dashboard from './pages/Admin/Dashboard/Dashboard';
 import CreateProduct from './pages/Admin/Dashboard/CreateProduct';
@@ -16,16 +15,20 @@ import CustomerDetails from './pages/Admin/Dashboard/CustomerDetails';
 import OrderDetails from './pages/Admin/Dashboard/OrderDetails';
 import AdminProfile from './components/Admin/AdminProfile';
 import ProductDetails from './pages/Admin/Dashboard/ProductDetails';
+import Wishlist from './pages/Client/Shopping/Wishlist';
+import OrderHistory from './pages/Client/Shopping/OrderHistory';
+import CustomerProfile from './pages/Client/Profile/CustomerProfile';
 
 function App() {
   return (
     <>
       <Routes>
         <Route path='/' element={<LandingPage />} />
-        <Route path='/Products' element={<AllProducts />} />
+        <Route path='/products' element={<AllProducts />} />
         <Route path='/about' element={<AboutUs />} />
-        <Route path='/client' element={<CustomerDashboard />} />
-        <Route path='/client/CWO/cart' element={<Cart />} />
+        <Route path='/cart' element={<Cart />} />
+        <Route path='/wishlist' element={<Wishlist />} />
+        <Route path='/orderhistory' element={<OrderHistory />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/SignIn' element={<SignIn />} />
         <Route path='/SignUp' element={<SignUp />} />
@@ -41,6 +44,7 @@ function App() {
           element={<ProductDetails />}
         />
         <Route path='/admin/profile' element={<AdminProfile />} />
+        <Route path='/customer/profile' element={<CustomerProfile />} />
         <Route
           path='/admin/order-details/:orderId'
           element={<OrderDetails />}

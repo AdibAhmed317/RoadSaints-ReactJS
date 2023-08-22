@@ -29,7 +29,7 @@ const OrderList = () => {
       });
   };
 
-  const [totalRevenue, setTotalRevenue] = useState(0); // State for total revenue
+  const [totalRevenue, setTotalRevenue] = useState(0); //total revenue
 
   return (
     <div className='container mx-auto p-6'>
@@ -48,7 +48,7 @@ const OrderList = () => {
           Search
         </button>
       </div>
-      {/* Display total revenue */}
+      
       <div className='mb-4'>
         <p className='font-semibold'>
           Total Revenue: ${totalRevenue.toFixed(2)}
@@ -78,7 +78,7 @@ const OrderList = () => {
                 </td>
                 <td className='py-3 px-4 text-center'>
                   <Link
-                    to={`/admin/order-details/${order.OrderId}`} // Replace with actual link
+                    to={`/admin/order-details/${order.OrderId}`} 
                     className='text-blue-500 hover:underline'>
                     Details
                   </Link>

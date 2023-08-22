@@ -106,8 +106,8 @@ const CreateForm = () => {
   };
 
   return (
-    <div className='container mx-auto p-8'>
-      <h2 className='text-2xl font-semibold mb-4'>Create New Product</h2>
+    <div className='container p-8 mx-auto'>
+      <h2 className='mb-4 text-2xl font-semibold'>Create New Product</h2>
       <form onSubmit={handleSubmit}>
         <div className='mb-4'>
           <label className='block text-gray-700'>Product Name</label>
@@ -164,12 +164,12 @@ const CreateForm = () => {
         </div>
         <button
           type='submit'
-          className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'>
+          className='px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600'>
           Create Product
         </button>
       </form>
       <div className='mt-8'>
-        <h2 className='text-2xl font-semibold mb-4'>Add New Category</h2>
+        <h2 className='mb-4 text-2xl font-semibold'>Add New Category</h2>
         <form onSubmit={handleCategorySubmit}>
           <div className='mb-4'>
             <label className='block text-gray-700'>Category Name</label>
@@ -184,7 +184,7 @@ const CreateForm = () => {
           </div>
           <button
             type='submit'
-            className='px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600'>
+            className='px-4 py-2 text-white bg-blue-500 rounded hover:bg-blue-600'>
             Add Category
           </button>
         </form>

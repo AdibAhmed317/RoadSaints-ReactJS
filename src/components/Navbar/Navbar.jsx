@@ -1,14 +1,43 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
+import { FaShoppingCart, FaHeart, FaHistory } from "react-icons/fa";
+import axios from "axios";
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
+
 
 const Navbar = () => {
   const [customerid, setCustomerid] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [cartItemCount, setCartItemCount] = useState(0);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    updateCartItemCount();
+  }, []);
+
+  const updateCartItemCount = async () => {
+    const customerId = localStorage.getItem("CustomerId");
+
+    if (customerId) {
+      try {
+        const response = await axios.get(
+          `http://localhost:49907/api/shoppingcart/itemcount/${customerId}`
+        );
+
+        if (response.status === 200) {
+          const itemCount = response.data;
+          setCartItemCount(itemCount);
+        }
+      } catch (error) {
+        console.error("Error fetching cart item count:", error);
+      }
+    } else {
+      setCartItemCount(0);
+    }
+  };
 
   useEffect(() => {
     try {
@@ -54,9 +83,9 @@ const Navbar = () => {
 
   return (
     <div>
-      <nav className='bg-gray-950 p-4'>
-        <div className='mx-auto flex justify-between items-center text-base font-thin'>
-          <Link to='/' className='text-white text-3xl font-extralight'>
+      <nav className='p-4 bg-gray-950'>
+        <div className='flex items-center justify-between mx-auto text-base font-thin'>
+          <Link to='/' className='text-3xl text-white font-extralight'>
             RoadSaints
           </Link>
           <ul className='flex space-x-4'>
@@ -85,14 +114,14 @@ const Navbar = () => {
                 <li>
                   <Link
                     to='/SignUp'
-                    className='text-white hover:text-gray-300 px-4 py-2 rounded-md bg-green-500 hover:bg-green-600'>
+                    className='px-4 py-2 text-white bg-green-500 rounded-md hover:text-gray-300 hover:bg-green-600'>
                     Sign Up
                   </Link>
                 </li>
                 <li>
                   <Link
                     to='/SignIn'
-                    className='text-white hover:text-gray-300 px-4 py-2 rounded-md bg-blue-500 hover:bg-blue-600'>
+                    className='px-4 py-2 text-white bg-blue-500 rounded-md hover:text-gray-300 hover:bg-blue-600'>
                     Sign In
                   </Link>
                 </li>
@@ -104,14 +133,14 @@ const Navbar = () => {
                     <li>
                       <Link
                         to='/admin/dashboard'
-                        className='text-black hover:text-gray-300 px-4 py-2 rounded-md bg-yellow-500 hover:bg-yellow-600'>
+                        className='px-4 py-2 text-black bg-yellow-500 rounded-md hover:text-gray-300 hover:bg-yellow-600'>
                         Dashboard
                       </Link>
                     </li>
                     <li>
                       <button
                         onClick={handleLogout}
-                        className='-mt-2 text-black hover:text-gray-300 px-4 py-2 rounded-md bg-red-500 hover:bg-red-600'>
+                        className='px-4 py-2 -mt-2 text-black bg-red-500 rounded-md hover:text-gray-300 hover:bg-red-600'>
                         Logout
                       </button>
                     </li>
@@ -120,15 +149,47 @@ const Navbar = () => {
                   <>
                     <li>
                       <Link
-                        to='/profile'
-                        className='-mt-2 text-black hover:text-gray-300 px-4 py-2 rounded-md bg-purple-500 hover:bg-purple-600'>
+                        to='/customer/profile'
+                        className='px-4 py-2 -mt-2 text-black bg-purple-500 rounded-md hover:text-gray-300 hover:bg-purple-600'>
                         Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/cart"
+                        className="flex h-10 px-4 py-2 -mt-2 text-black bg-blue-500 rounded-md hover:text-gray-300 hover:bg-blue-600"
+                      >
+                        <div className="relative">
+                          <FaShoppingCart className="inline mr-2" />
+                          {cartItemCount > 0 && (
+                            <div className="absolute flex items-center justify-center w-6 h-6 text-xs text-white bg-red-500 rounded-full -left-4 -top-2">
+                              {cartItemCount}
+                            </div>
+                          )}
+                        </div>
+                        Cart
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/wishlist"
+                        className="h-10 px-4 py-2 -mt-2 text-black bg-green-500 rounded-md hover:text-gray-300 hover:bg-green-600"
+                      >
+                        <FaHeart className="inline mr-2" /> Wishlist
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/orderhistory"
+                        className="h-10 px-4 py-2 -mt-2 text-black bg-yellow-500 rounded-md hover:text-gray-300 hover:bg-yellow-600"
+                      >
+                        <FaHistory className="inline mr-2" /> Order History
                       </Link>
                     </li>
                     <li>
                       <button
                         onClick={handleLogout}
-                        className='-mt-2 text-black hover:text-gray-300 px-4 py-2 rounded-md bg-red-500 hover:bg-red-600'>
+                        className='px-4 py-2 -mt-2 text-black bg-red-500 rounded-md hover:text-gray-300 hover:bg-red-600'>
                         Logout
                       </button>
                     </li>
